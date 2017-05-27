@@ -24,23 +24,7 @@
         data(){
             return{
                 newUser: {},
-                users: [
-                    {
-                        name: 'Imran Farid',
-                        email: 'imran@gmail.com',
-                        contacted: false
-                    },
-                    {
-                        name: 'Shafqat Alam',
-                        email: 'shafqat@gmail.com',
-                        contacted: false
-                    },
-                    {
-                        name: 'Zakir Hossain',
-                        email: 'zakir@gmail.com',
-                        contacted: false
-                    }
-                ]
+                users: []
             }
         },
         methods: {
@@ -55,6 +39,12 @@
             deleteUser: function(user){
                 this.users.splice(this.users.indexOf(user), 1);
             }
+        },
+        created: function(){
+            this.$http.get('http://jsonplaceholder.typicode.com/users')
+            .then(function(response){
+                this.users = response.data;
+            });
         }
     }
 </script>
